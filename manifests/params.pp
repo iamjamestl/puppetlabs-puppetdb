@@ -74,7 +74,7 @@ class puppetdb::params inherits puppetdb::globals {
 
   if !($puppetdb_version in ['latest','present','absent']) and versioncmp($puppetdb_version, '3.0.0') < 0 {
     case $::osfamily {
-      'RedHat', 'Suse', 'Archlinux','Debian': {
+      'RedHat', 'Suse', 'Archlinux', 'Debian', 'Gentoo': {
         $etcdir                 = '/etc/puppetdb'
         $vardir                 = '/var/lib/puppetdb'
         $database_embedded_path = "${vardir}/db/db"
@@ -103,7 +103,7 @@ class puppetdb::params inherits puppetdb::globals {
     $test_url         = '/v3/version'
   } else {
     case $::osfamily {
-      'RedHat', 'Suse', 'Archlinux','Debian': {
+      'RedHat', 'Suse', 'Archlinux', 'Debian', 'Gentoo': {
         $etcdir              = '/etc/puppetlabs/puppetdb'
         $puppet_confdir      = pick($settings::confdir,'/etc/puppetlabs/puppet')
         $puppet_service_name = 'puppetserver'
@@ -132,7 +132,7 @@ class puppetdb::params inherits puppetdb::globals {
   $ssl_dir = "${etcdir}/ssl"
 
   case $::osfamily {
-    'RedHat', 'Suse', 'Archlinux': {
+    'RedHat', 'Suse', 'Archlinux', 'Gentoo': {
       $puppetdb_user     = 'puppetdb'
       $puppetdb_group    = 'puppetdb'
       $puppetdb_initconf = '/etc/sysconfig/puppetdb'
